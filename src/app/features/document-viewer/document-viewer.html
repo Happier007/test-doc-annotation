@@ -1,0 +1,96 @@
+<header class="document-viewer__toolbar">
+  <h1
+    class="document-viewer__title"
+    [title]="document?.name ?? 'Документ'"
+  >
+    {{ document()?.name ?? 'Документ' }}
+  </h1>
+
+  <div class="document-viewer__actions">
+    <div class="document-viewer__zoom-controls">
+      <button
+        class="document-viewer__zoom-button"
+        type="button"
+        aria-label="Уменьшить масштаб"
+        [disabled]="zoomPercent() <= 10"
+        (click)="zoomOut()"
+      >
+        −
+      </button>
+
+      <div class="document-viewer__zoom-value">{{ zoomPercent() }}%</div>
+
+      <button
+        class="document-viewer__zoom-button"
+        type="button"
+        aria-label="Увеличить масштаб"
+        (click)="zoomIn()"
+      >
+        +
+      </button>
+    </div>
+
+    <button
+      class="document-viewer__save-button"
+      type="button"
+      [disabled]="!document()"
+      (click)="save()"
+    >
+      Сохранить
+    </button>
+  </div>
+</header>
+
+<main class="document-viewer__workspace">
+  @if (hasError()) {
+    <section class="document-viewer__status">
+      <h1>Ошибка загрузки документа</h1>
+    </section>
+  } @else if (document(); as currentDocument) {
+    <p class="document-viewer__hint">
+      Дважды щёлкните по странице, чтобы добавить аннотацию. Готовые заметки можно
+      перетаскивать.
+    </p>
+
+    <div
+      class="document-viewer__pages"
+      [style.--zoom]="zoom()"
+      [style.--page-width.px]="pageWidth"
+      [style.--page-height.px]="pageHeight"
+      [style.--draft-width.px]="draftWidth"
+      [style.--draft-height.px]="draftHeight"
+    >
+      @for (page of currentDocument.pages; track page.number; let first = $first) {
+        <div class="document-viewer__page" (dblclick)="openAnnotationEditor($event, page.number)">
+          <img
+            class="document-viewer__page-image"
+            [ngSrc]="page.imageUrl"
+            [width]="pageWidth"
+            [height]="pageHeight"
+            [priority]="first"
+            alt="" />
+
+          @for (annotation of this.annotations() | annotationsForPage: page.number; track annotation.id) {
+            <app-text-annotation
+              [annotation]="annotation"
+              (moved)="moveAnnotation(annotation.id, $event)"
+              (removed)="removeAnnotation(annotation.id)"
+            />
+          }
+
+          @if (draftAnnotationPosition(); as draft) {
+            @if (draft.pageNumber === page.number) {
+              <app-annotation-editor
+                [position]="draft"
+                (submitted)="addTextAnnotation($event)"
+                (canceled)="cancelAnnotationEditor()"
+              />
+            }
+          }
+        </div>
+      }
+    </div>
+  } @else {
+    <section class="document-viewer__status">Загрузка документа…</section>
+  }
+</main>

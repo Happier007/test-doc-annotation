@@ -1,0 +1,21 @@
+<div
+  class="text-annotation-editor"
+  [style.left.%]="position().x * 100"
+  [style.top.%]="position().y * 100"
+  (dblclick)="$event.stopPropagation()"
+>
+  <input
+    class="text-annotation-editor__input"
+    #draftInput
+    type="text"
+    aria-label="Текст новой аннотации"
+    placeholder="Текст аннотации"
+    [value]="text()"
+    (input)="updateText($event)"
+    (keydown.enter)="submit()"
+    (keydown.escape)="canceled.emit()"
+    (blur)="canceled.emit()"
+  />
+
+  <span class="text-annotation-editor__hint">Enter — добавить · Esc — отменить</span>
+</div>

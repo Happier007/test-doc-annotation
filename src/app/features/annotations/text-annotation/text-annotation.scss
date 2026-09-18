@@ -1,0 +1,43 @@
+.text-annotation {
+  position: absolute;
+  width: max-content;
+  max-width: min(var(--draft-width), 100%);
+  min-width: min(var(--draft-width)/2, 100%);
+  max-height: 100%;
+  overflow: auto;
+  padding: 8px 30px 8px 10px;
+  border: 1px solid #d4ac40;
+  border-radius: 7px;
+  background: #fff0b3;
+  color: #41350e;
+  box-shadow: 0 3px 10px rgb(55 45 23 / 16%);
+  cursor: grab;
+  user-select: none;
+  z-index: 2;
+}
+
+.text-annotation:active {
+  cursor: grabbing;
+}
+
+.text-annotation__text {
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.text-annotation__delete-button {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #765d12;
+  font-size: 20px;
+  line-height: 20px;
+  cursor: pointer;
+}

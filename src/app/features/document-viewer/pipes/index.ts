@@ -1,0 +1,1 @@
+export { AnnotationsForPagePipe } from './annotations-for-page-pipe';

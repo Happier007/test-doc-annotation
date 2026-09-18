@@ -1,0 +1,34 @@
+.text-annotation-editor {
+  position: absolute;
+  width: var(--draft-width);
+  max-width: 100%;
+  padding: 6px;
+  border: 1px solid #d4ac40;
+  border-radius: 7px;
+  background: #fff0b3;
+  box-shadow: 0 3px 10px rgb(55 45 23 / 16%);
+  cursor: text;
+  z-index: 4;
+}
+
+.text-annotation-editor__input {
+  display: block;
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #cfc8bd;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 14px;
+}
+
+.text-annotation-editor__input:focus {
+  border: 2px solid #2c5d55;
+  outline: none;
+}
+
+.text-annotation-editor__hint {
+  display: block;
+  margin-top: 4px;
+  color: #765d12;
+  font-size: 11px;
+}

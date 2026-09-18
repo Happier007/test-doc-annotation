@@ -1,0 +1,19 @@
+<article
+  class="text-annotation"
+  [style.left.%]="annotation().x * 100"
+  [style.top.%]="annotation().y * 100"
+  (mousedown)="startDrag($event)"
+  (dblclick)="$event.stopPropagation()"
+>
+  <span class="text-annotation__text">{{ annotation().text }}</span>
+
+  <button
+    class="text-annotation__delete-button"
+    type="button"
+    aria-label="Удалить аннотацию"
+    (mousedown)="$event.stopPropagation()"
+    (click)="removed.emit()"
+  >
+    ×
+  </button>
+</article>

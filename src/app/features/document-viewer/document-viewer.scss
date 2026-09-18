@@ -1,0 +1,136 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+}
+
+.document-viewer__toolbar {
+  position: sticky;
+  top: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 24px;
+  min-height: 76px;
+  padding: 10px 24px;
+  border-bottom: 1px solid #d8d3ca;
+  background: #fffdf9;
+  z-index: 10;
+}
+
+.document-viewer__title {
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #2a2926;
+  font-weight: 700;
+}
+
+.document-viewer__actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+}
+
+.document-viewer__zoom-controls {
+  display: inline-flex;
+  align-items: stretch;
+  height: 40px;
+  border: 1px solid #cfc8bd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.document-viewer__zoom-button,
+.document-viewer__save-button {
+  border: 1px solid #cfc8bd;
+  background: #fffdf9;
+  color: #393631;
+  padding: 10px 15px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.document-viewer__zoom-button {
+  height: 100%;
+  display: flex;
+  flex: 0 0 40px;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.document-viewer__zoom-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  height: 100%;
+  padding: 0 10px;
+  border-inline: 1px solid #cfc8bd;
+  background: #f7f4ee;
+  font-size: 14px;
+}
+
+.document-viewer__zoom-button:hover:not(:disabled) {
+  background: #ece7dd;
+}
+
+.document-viewer__zoom-button:disabled,
+.document-viewer__save-button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.document-viewer__save-button {
+  border-color: #2c5d55;
+  border-radius: 7px;
+  background: #2c5d55;
+  color: #fff;
+}
+
+.document-viewer__save-button:hover:not(:disabled) {
+  background: #214840;
+}
+
+.document-viewer__workspace {
+  padding: 24px;
+  overflow: auto;
+  background: #f4f1ec;
+}
+
+.document-viewer__hint {
+  width: fit-content;
+  margin: 0 auto 18px;
+  color: #706b62;
+  font-size: 14px;
+}
+
+.document-viewer__pages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  min-width: 100%;
+}
+
+.document-viewer__page {
+  position: relative;
+  width: calc(var(--page-width) * var(--zoom));
+  height: calc(var(--page-height) * var(--zoom));
+  background: #fffdf9;
+  transition: width 160ms ease, height 160ms ease;
+  user-select: none;
+}
+
+.document-viewer__page-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
